@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px 30px;
+  background-color: #17324d;
+  color: white;
+}
+
+.site-header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.site-header nav {
+  display: flex;
+  gap: 20px;
+}
+
+.site-header a {
+  color: white;
+  text-decoration: none;
+}
+
+.site-header a:hover,
+.site-header a:focus-visible {
+  text-decoration: underline;
+}
