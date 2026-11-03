@@ -1,0 +1,35 @@
+# Gitpod Classic configuration: put this and .gitpod.Dockerfile
+# in the root of your Git repository.
+image:
+  file: .gitpod.Dockerfile
+
+ports:
+  - port: 5173
+    name: Game frontend (Vite / Phaser)
+    onOpen: open-preview
+  - port: 8000
+    name: Python backend (FastAPI)
+    onOpen: notify
+
+tasks:
+  - name: Game frontend
+    init: |
+      if [ -f package.json ]; then npm install; fi
+    command: |
+      if [ -f package.json ]; then
+        npm run dev -- --host 0.0.0.0
+      else
+        echo 'No package.json yet. Create a Phaser/Vite project to start the frontend.'
+      fi
+  - name: Python backend
+    init: |
+      if [ -f requirements.txt ]; then
+        python3 -m venv .venv
+        .venv/bin/pip install -r requirements.txt
+      fi
+    command: |
+      if [ -f backend/main.py ] && [ -x .venv/bin/uvicorn ]; then
+        .venv/bin/uvicorn backend.main:app --host 0.0.0.0 --port 8000
+      else
+        echo 'Optional backend not started. Add requirements.txt and backend/main.py for FastAPI.'
+      fi
